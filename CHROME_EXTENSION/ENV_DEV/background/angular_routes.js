@@ -1,0 +1,17 @@
+hitboxApp.config(['$routeProvider',function($routeProvider){
+	$routeProvider.when('/following',{
+		templateUrl:'stream-list.html',
+		controller:'FollowingCtrl'
+	}).when('/login',{
+		templateUrl:'login.html',
+		controller:'LoginCtrl'
+	}).when('/settings',{
+		templateUrl:'settings.html',
+		controller:'SettingsCtrl'
+	}).when('/allstreams',{
+		templateUrl:'stream-list.html',
+		controller:'AllstreamsCtrl'
+	}).otherwise({
+		redirectTo:'/following'
+	});
+}]);
