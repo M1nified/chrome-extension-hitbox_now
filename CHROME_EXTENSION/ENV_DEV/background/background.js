@@ -6,7 +6,7 @@ var livestreamOld = null;
 var settings = {interval:300000,notifications:true};
 chrome.storage.onChanged.addListener(function(changes,areaName){
 	if(areaName == "sync"){
-		console.log(changes);
+		// console.log(changes);
 		if(changes.auth_token){
 			user_auth_token = changes.auth_token.newValue || null;
 		}
@@ -67,10 +67,11 @@ var restartWatcher = function(){
 	}
 }
 var update = function(){
-	console.log(settings);
+	// console.log(settings);
 	//console.log("WATCHER")
-	$.getJSON("https://www.hitbox.tv/api/media/live/list?follower_id="+user_id,function(response){
-		console.log(response)
+	// console.log(user_id)
+	$.getJSON("https://api.hitbox.tv/media/live/list?follower_id="+user_id,function(response){
+		// console.log(response)
 		if(response && response.livestream){
 			chrome.storage.local.set({livestream:response.livestream},function(){
 				alertAboutStreams(response.livestream,livestreamOld);
@@ -89,7 +90,7 @@ var alertAboutStreams = function(livestream,lsold){
 	if(livestream && livestream.length>0){
 		chrome.browserAction.setBadgeText({text:livestream.length.toString()})
 		if(settings.notifications){
-			console.log(livestream)
+			// console.log(livestream)
 			if(lsold){
 				for(var i in livestream){
 					if(!lsold[livestream[i].media_display_name]){
