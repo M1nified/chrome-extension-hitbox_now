@@ -3,7 +3,7 @@ var hitboxApp = angular.module("hitboxApp",['ngRoute']);
 hitboxApp.service('thechrome',function($rootScope,$q){
 	return{
 		storageSyncGet:function(query){
-			var deferred = $q.defer(); 
+			var deferred = $q.defer();
 			chrome.storage.sync.get(query,function(data){
 				if(data){
 					deferred.resolve(data);
@@ -21,10 +21,10 @@ hitboxApp.service('thechrome',function($rootScope,$q){
 	}
 });
 
-hitboxApp.service('thehitbox',function($rootScope,$q){
+hitboxApp.service('thehitbox',function($rootScope,$q,$http){
 	return{
 		getLiveFollowed:function(){
-			var deferred = $q.defer(); 
+			var deferred = $q.defer();
 			chrome.storage.local.get({livestream:null},function(response){
 				console.log(response)
 				if(response){
@@ -37,7 +37,7 @@ hitboxApp.service('thehitbox',function($rootScope,$q){
 			return deferred.promise;
 		},
 		getAllStreams:function(){
-			var deferred = $q.defer(); 
+			var deferred = $q.defer();
 			$http.get("http://api.hitbox.tv/media").success(function(response){
 				console.log(response)
 				if(response){
@@ -83,7 +83,7 @@ hitboxApp.controller('PopupCtrl',function($scope,thechrome,$location){
 			document.location.reload();
 		}
 	}
-	
+
 	thechrome.storageSyncGet({auth_token:null,user_id:null,login:null}).then(function(result){
 		if(result.auth_token === null || result.user_id === null){
 			document.location.href="#/login"

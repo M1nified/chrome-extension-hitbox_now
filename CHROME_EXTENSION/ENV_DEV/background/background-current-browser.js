@@ -3,7 +3,7 @@ var notify = function(ls){
 	var opt = {
 		type:"image",
 		iconUrl:"../img/icon_128_bordered_white.png",
-		imageUrl:"http://edge.vie.hitbox.tv"+ls.media_thumbnail_large,
+		imageUrl:"http://edge.sf.hitbox.tv"+ls.media_thumbnail_large,
 		title:ls.media_display_name || "",
 		message:ls.category_name || "",
 		isClickable:true

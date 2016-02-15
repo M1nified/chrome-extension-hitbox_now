@@ -36,7 +36,7 @@
     "http://*.hitbox.tv/*"
   ],
   "short_name": "Hitbox Now!",
-  "version": "1.3",
+  "version": "1.4",
   "web_accessible_resources": [
   ]
 }
