@@ -7,9 +7,9 @@ function routeConfig($routeProvider){
         template : 'AllStreams/main.html',
         controller: 'AllStreamsCtrl'
     }).
-    when('/Following',{
-        template : 'Following/main.html',
-        controller: 'FollowingCtrl'
+    when('/Followed',{
+        template : 'Followed/main.html',
+        controller: 'FollowedCtrl'
     }).
     when('/Login',{
         template : 'Login/main.html',
@@ -24,6 +24,6 @@ function routeConfig($routeProvider){
         controller: 'StreamsCtrl'
     }).
     otherwise({
-        redirectTo:'/Following'
+        redirectTo:'/Followed'
     })
 }])

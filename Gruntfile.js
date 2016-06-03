@@ -14,9 +14,11 @@ module.exports = function(grunt){
                 files: [
                     {src : 'src/lib/angular.min.js'},
                     {src : 'src/lib/angular-*.js'},
-                    {src : 'test/**/*.js'},
+                    // {src : 'test/**/*.js'},
+                    {src : 'test/angular-*.js'},
                     {src : 'src/popup/**.js'},
-                    {src : 'src/popup/**/*.js'}
+                    {src : 'src/popup/**/*.js'},
+                    {src : 'test/mock.js'}
                 ]
             }
         }

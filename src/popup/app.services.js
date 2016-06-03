@@ -1,3 +1,4 @@
+"use strict";
 angular.module('popup').
 service('ChromeSrvc',function($rootScope,$q){
 	return{
@@ -53,3 +54,36 @@ service('HitboxSrvc',function($rootScope,$q,$http){
 		}
 	}
 });
+angular.module('popup').
+service('AuthSrvc',function($http){
+	return {
+		login : function(form){
+			return $http.post('http://api.hitbox.tv/auth/token',{
+				data:{
+					login:form.login,
+					pass:form.pass,
+					app:"desktop"
+				},
+				responseType:"json"
+			}).
+			then((response)=>{
+				let data = response ? response.data : response;
+				if(data && data.authToken){
+					return $http.get("http://api.hitbox.tv/user/"+form.login).
+					then((userdata)=>{
+						userdata = userdata ? userdata.data : null;
+						if(userdata && userdata.user_id){
+							chrome.storage.sync.set({
+								auth_token:data.auth_token,
+								login:form.login,
+								user_id:userdata.user_id
+							},()=>{
+								$location.path('/Followed')
+							})
+						}
+					})
+				}
+			})
+		}
+	}
+})
