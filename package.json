@@ -1,0 +1,37 @@
+{
+  "name": "chrome-hitbox_now",
+  "version": "1.0.0",
+  "description": "Chrome & Opera extension for hitbox users",
+  "main": " ",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M1nified/chrome_extension_Hitbox_Now.git"
+  },
+  "keywords": [
+    "hitbox",
+    "chrome",
+    "opera"
+  ],
+  "author": "M1nified",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/M1nified/chrome_extension_Hitbox_Now/issues"
+  },
+  "homepage": "https://github.com/M1nified/chrome_extension_Hitbox_Now#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-karma": "^2.0.0",
+    "grunt-typescript": "^0.8.0",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "typescript": "^1.8.10"
+  }
+}
