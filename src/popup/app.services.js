@@ -1,4 +1,3 @@
-"use strict";
 angular.module('popup').
 service('ChromeSrvc',function($rootScope,$q){
 	return{

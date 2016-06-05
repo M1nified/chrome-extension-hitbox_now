@@ -3,7 +3,9 @@ var user_login = null;
 var user_auth_token = null;
 var notifications = true;
 var livestreamOld = null;
-var settings = {interval:300000,notifications:true};
+var settings = {
+	interval:300000,notifications:true
+};
 chrome.storage.onChanged.addListener(function(changes,areaName){
 	if(areaName == "sync"){
 		// console.log(changes);
