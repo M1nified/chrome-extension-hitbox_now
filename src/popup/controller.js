@@ -1,5 +1,6 @@
 angular.module('popup').
 controller('PopupCtrl',function($scope,$location,ChromeSrvc){
+  $scope.login = null;
   $scope.isActive = function(dir){
     return dir === $location.path();
   };
@@ -23,11 +24,14 @@ controller('PopupCtrl',function($scope,$location,ChromeSrvc){
         })
       }
     });
-    $location.path()!=='/followed' && document.location.reload();
-    
-    ChromeSrvc.storageSyncGet({
+    $location.path()!=='/Followed' && document.location.reload();
+    updateUserInfo();
+  };
+  let updateUserInfo = () => {
+    return ChromeSrvc.storageSyncGet({
       auth_token:null,user_id:null,login:null
     }).then((result)=>{
+      debugger;
       result.auth_token === null || result.user_id === null && (document.location.herf = '#/Login');
       $scope.auth_token = result.auth_token;
       $scope.user_id = result.user_id;
@@ -35,4 +39,7 @@ controller('PopupCtrl',function($scope,$location,ChromeSrvc){
       user_id = result.user_id;
     })
   };
+  updateUserInfo().then(()=>{
+    $scope.login || $location.path('/Login');
+  });
 })

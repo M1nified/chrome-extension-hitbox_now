@@ -54,14 +54,19 @@ service('HitboxSrvc',function($rootScope,$q,$http){
 	}
 });
 angular.module('popup').
-service('AuthSrvc',function($http){
+service('AuthSrvc',function($http,$location){
 	return {
 		login : function(form){
-			return $http.post('http://api.hitbox.tv/auth/token',{
+			return $http({
+				method:'POST',
+				url:'http://api.hitbox.tv/auth/token',
 				data:{
 					login:form.login,
 					pass:form.pass,
 					app:"desktop"
+				},
+				headers:{
+					'Content-Type': 'application/x-www-form-urlencoded'
 				},
 				responseType:"json"
 			}).

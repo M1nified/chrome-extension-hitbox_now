@@ -9,14 +9,16 @@
 </head>
 <body>
 	<div id="menu-top">
-		<input id="contentFilter" ng-model="contentFilter" type="text" placeholder="filters" autofocus>
-		<section class="account" ng-show="login">
-			<span class="login">{{login}}</span> |
-			<a class="logout" ng-click="logout()">Logout</a>
-		</section>
-		<section class="account" ng-hide="login">
-			<a href="#/Login" class="loginButton">Login</a>
-		</section>
+		<input id="contentFilter" ng-model="contentFilter" type="text" placeholder="Filter" autofocus>
+		<div id="account">
+			<div class="account" ng-show="login">
+				<span class="login">{{login}}</span> |
+				<a class="logout" ng-click="logout()">Logout</a>
+			</div>
+			<div class="account" ng-hide="login">
+				<a href="#/Login" class="loginButton">Login</a>
+			</div>
+		</div>
 	</div>
 	<div id="menu-left">
 		<a class="button" href="#/Followed" title="Followed" ng-class="{active:isActive('/Followed')}">
@@ -32,6 +34,9 @@
 			<img src="../img/update.png" id="updateBtn-img">
 		</a>
 	</div>
-	<div id="content"><div ng-view></div></div>
+	<div id="content">
+		<div class="waiter" ng-init="waiting=false" ng-show="waiting"></div>
+		<div ng-view></div>
+	</div>
 </body>
 </html>
