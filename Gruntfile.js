@@ -84,7 +84,7 @@ module.exports = function(grunt){
                             'lib/*',
                             'img/*'
                         ],
-                        dest:'builds/ext_chrome'
+                        dest:'builds/ext_chrome/'
                     }
                 ]
             }
