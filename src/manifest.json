@@ -3,6 +3,8 @@
   "background": {
     "scripts": [
       "/lib/jquery.min.js",
+      "/class/Storage.js",
+      "/class/Followers.js",
       "/background/background.js"
     ]
   },

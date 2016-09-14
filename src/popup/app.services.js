@@ -50,6 +50,13 @@ service('HitboxSrvc',function($rootScope,$q,$http){
 				deferred.reject();
 			})
 			return deferred.promise;
+		},
+		getAllFollowed:function(){
+			var deferred = $q.defer();
+			Storage.getFollowedChannelsObjects().then(followed_channels_objects=>{
+				deferred.resolve(followed_channels_objects);
+			});
+			return deferred.promise;
 		}
 	}
 });

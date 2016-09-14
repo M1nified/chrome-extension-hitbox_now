@@ -99,7 +99,8 @@ module.exports = function(grunt){
                         expand:true,
                         cwd:'src/',
                         src:[
-                            'background/background.js'
+                            'background/background.js',
+                            'class/*'
                         ],
                         dest:'builds/ext_chrome/'
                     }
