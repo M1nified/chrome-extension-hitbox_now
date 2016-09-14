@@ -28,9 +28,9 @@ chrome.storage.onChanged.addListener(function(changes,areaName){
 	}
 })
 $(document).ready(function(){
-	//console.log("READY")
+	// console.log("READY")
 	chrome.storage.sync.get({auth_token:null,login:null,user_id:null,settings:null},function(data){
-		if(data && data.auth_token && data.login && data.user_id){
+		if(data){
 			user_id = data.user_id;
 			user_login = data.login;
 			user_auth_token = data.auth_token;
@@ -61,32 +61,27 @@ var updateSettings = function(sett){
 }
 var watcherInterval = null;
 var restartWatcher = function(){
-	//console.log("RESTART WATCHER")
+	console.log("RESTART WATCHER")
 	clearTimeout(watcherInterval);
+	// console.log(user_id)
+	// console.log(user_login)
+	// console.log(user_auth_token)
 	if(user_id && user_login && user_auth_token){
 		update();
 		watcherInterval = setInterval(update,parseInt(settings.interval));
 	}
 }
 var update = function(){
-	// console.log(settings);
-	//console.log("WATCHER")
-	// console.log(user_id)
-	$.getJSON("https://api.hitbox.tv/media/live/list?follower_id="+user_id,function(response){
-		// console.log(response)
-		if(response && response.livestream){
-			chrome.storage.local.set({livestream:response.livestream},function(){
-				alertAboutStreams(response.livestream,livestreamOld);
-				livestreamOld = [];
-				for(var i in response.livestream){
-					livestreamOld[response.livestream[i].media_display_name] = response.livestream[i];
-				}
-			})
+	HitBox.updateFollowedLives().then(response=>{
+		console.log(response);
+		alertAboutStreams(response.livestream,livestreamOld);
+		livestreamOld = [];
+		for(let ls of response.livestream){
+			livestreamOld[ls.media_display_name] = ls;
 		}
-	}).fail(function(){
+	}).fail(()=>{
 		alertAboutStreams();
-		chrome.storage.local.set({livestream:null});
-	})
+	});
 }
 var alertAboutStreams = function(livestream,lsold){
 	if(livestream && livestream.length>0){
@@ -115,6 +110,7 @@ chrome.notifications.onClicked.addListener(function(notificationId){
 })
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+		// console.log(request)
     if (request.query == "update"){
       restartWatcher();
       sendResponse(true)

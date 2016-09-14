@@ -50,14 +50,15 @@ service('HitboxSrvc',function($rootScope,$q,$http){
 				deferred.reject();
 			})
 			return deferred.promise;
-		},
-		getAllFollowed:function(){
-			var deferred = $q.defer();
-			Storage.getFollowedChannelsObjects().then(followed_channels_objects=>{
-				deferred.resolve(followed_channels_objects);
-			});
-			return deferred.promise;
 		}
+		// ,
+		// getAllFollowed:function(){
+		// 	var deferred = $q.defer();
+		// 	Storage.getFollowedChannelsObjects().then(followed_channels_objects=>{
+		// 		deferred.resolve(followed_channels_objects);
+		// 	});
+		// 	return deferred.promise;
+		// }
 	}
 });
 angular.module('popup').
@@ -78,6 +79,7 @@ service('AuthSrvc',function($http,$location){
 				responseType:"json"
 			}).
 			then((response)=>{
+				console.log(response);
 				let data = response ? response.data : response;
 				if(data && data.authToken){
 					return $http.get("http://api.hitbox.tv/user/"+form.login).
@@ -85,7 +87,7 @@ service('AuthSrvc',function($http,$location){
 						userdata = userdata ? userdata.data : null;
 						if(userdata && userdata.user_id){
 							chrome.storage.sync.set({
-								auth_token:data.auth_token,
+								auth_token:data.authToken,
 								login:form.login,
 								user_id:userdata.user_id
 							},()=>{

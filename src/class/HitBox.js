@@ -15,17 +15,15 @@ var HitBox = {
       Storage.updateFollowed(followed_channels);
     })
   },
-  updateFollowedChannelsObjects : function(){
+  updateFollowedLives : function(){
     return new Promise((resolve,reject)=>{
-      Storage.getFollowed().then(followed_channels=>{
-        console.log(followed_channels)
-        for(let followed_channel of followed_channels.following){
-          $.getJSON("https://api.hitbox.tv/media/live/"+followed_channel.user_name,user_object=>{
-            console.log(user_object);
-            Storage.updateFollowedChannelsObjects(user_object.livestream[0]);
-          })
-        }
-      })
-    })
+      return Storage.get_user_id().then(user_id=>{
+        $.getJSON("https://api.hitbox.tv/media/live/list?follower_id="+user_id,live_list=>{
+          return Storage.setFollowedLives(live_list).then(()=>{
+            resolve(live_list);
+          });
+        });
+      });
+    });
   }
 }

@@ -31,7 +31,7 @@ controller('PopupCtrl',function($scope,$location,ChromeSrvc){
     return ChromeSrvc.storageSyncGet({
       auth_token:null,user_id:null,login:null
     }).then((result)=>{
-      debugger;
+      // debugger;
       result.auth_token === null || result.user_id === null && (document.location.herf = '#/Login');
       $scope.auth_token = result.auth_token;
       $scope.user_id = result.user_id;

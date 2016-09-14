@@ -4,7 +4,7 @@
     "scripts": [
       "/lib/jquery.min.js",
       "/class/Storage.js",
-      "/class/Followers.js",
+      "/class/HitBox.js",
       "/background/background.js"
     ]
   },
