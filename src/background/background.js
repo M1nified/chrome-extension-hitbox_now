@@ -79,7 +79,7 @@ var update = function(){
 		for(let ls of response.livestream){
 			livestreamOld[ls.media_display_name] = ls;
 		}
-	}).fail(()=>{
+	}).catch(()=>{
 		alertAboutStreams();
 	});
 }
